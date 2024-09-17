@@ -40,9 +40,9 @@ describe("POST /login and use token for adding user", () => {
       .post("/users") // Endpoint untuk menambah user
       .set("Authorization", `Bearer ${accessToken}`) // Set token di header
       .send({
-        name: "user45",
-        email: "user45@yopmail.com",
-        password: "user45",
+        name: "user46",
+        email: "user46@yopmail.com",
+        password: "user46",
       });
 
     // Verifikasi response dari permintaan add user
@@ -52,7 +52,7 @@ describe("POST /login and use token for adding user", () => {
       "message",
       "User berhasil ditambahkan"
     );
-    expect(addUserResponse.body.data).to.have.property("name", "user45"); // Cek ID user yang ditambahkan
+    expect(addUserResponse.body.data).to.have.property("name", "user46"); // Cek ID user yang ditambahkan
   });
 
   it("Menambahkan pengguna yang sudah ditambahkan", async () => {
