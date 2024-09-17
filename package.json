@@ -1,0 +1,24 @@
+{
+  "name": "api-automation",
+  "version": "1.0.0",
+  "description": "api automation",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "author": "Dian Lesmana",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "jsonschema": "^1.4.1",
+    "mocha-allure-reporter": "^1.4.0"
+  },
+  "devDependencies": {
+    "axios": "^1.7.7",
+    "chai": "^5.1.1",
+    "chai-http": "^5.0.0",
+    "mocha": "^10.7.3",
+    "supertest": "^7.0.0"
+  }
+}
