@@ -40,9 +40,9 @@ describe("POST /login and use token for adding user", () => {
       .post("/users") // Endpoint untuk menambah user
       .set("Authorization", `Bearer ${accessToken}`) // Set token di header
       .send({
-        name: "user43",
-        email: "user43@yopmail.com",
-        password: "user43",
+        name: "user45",
+        email: "user45@yopmail.com",
+        password: "user45",
       });
 
     // Verifikasi response dari permintaan add user
@@ -52,7 +52,7 @@ describe("POST /login and use token for adding user", () => {
       "message",
       "User berhasil ditambahkan"
     );
-    expect(addUserResponse.body.data).to.have.property("name", "user43"); // Cek ID user yang ditambahkan
+    expect(addUserResponse.body.data).to.have.property("name", "user45"); // Cek ID user yang ditambahkan
   });
 
   it("Menambahkan pengguna yang sudah ditambahkan", async () => {
@@ -72,5 +72,30 @@ describe("POST /login and use token for adding user", () => {
       "message",
       "Email sudah digunakan"
     );
+  });
+
+  it("Menampilkan semua data user", async () => {
+    const getUsersResponse = await request(baseUrl)
+      .get("/users") // Endpoint untuk menambah user
+      .set("Authorization", `Bearer ${accessToken}`); // Set token di header
+
+    // Verifikasi response dari permintaan add user
+    expect(getUsersResponse.status).to.equal(200);
+    expect(getUsersResponse.body).to.have.property("status", "success");
+  });
+
+  it("Menampilkan detail user", async () => {
+    const userId = "15e3663c-02f3-4ebd-953f-a408c74d12da";
+
+    // Menggunakan template literal dengan benar di URL endpoint
+    const getUsersResponse = await request(baseUrl)
+      .get(`/users/${userId}`) // Endpoint untuk menampilkan detail user
+      .set("Authorization", `Bearer ${accessToken}`); // Set token di header
+
+    // Verifikasi response dari permintaan detail user
+    expect(getUsersResponse.status).to.equal(200); // Pastikan status 200 (OK)
+    expect(getUsersResponse.body).to.have.property("status", "success"); // Verifikasi status "success"
+    expect(getUsersResponse.body).to.have.property("data"); // Verifikasi bahwa ada data yang dikembalikan
+    expect(getUsersResponse.body.data.user).to.have.property("name", "user28"); // Verifikasi ID user
   });
 });
